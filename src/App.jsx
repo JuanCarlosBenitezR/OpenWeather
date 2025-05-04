@@ -1,6 +1,8 @@
 import axios from 'axios';
 import './App.css';
 import { useEffect, useState } from 'react';
+import Search from './Search';
+import Information from './Information';
 
 function App() {
 	const [weather, setWeather] = useState();
@@ -9,7 +11,7 @@ function App() {
 		lat: 0,
 		lon: 0,
 	});
-	const [value, setValue] = useState('');
+
 	useEffect(() => {
 		getWeatherByCity();
 	}, [city, coords]);
@@ -62,57 +64,13 @@ function App() {
 				console.error(err.response?.data?.message || err.message);
 			});
 	};
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setCoords({ lat: 0, lon: 0 });
-		if (value.trim()) {
-			console.log('entraaqui');
-			setCity(value);
-			setValue('');
-		} else {
-			setError('Debes ingresar una ciudad');
-			console.log('no ciudad');
-			console.log(value);
-		}
-	};
-	const handleLocation = () => {
-		if (navigator.geolocation) {
-			function success({ coords }) {
-				setCoords({ lat: coords.latitude, lon: coords.longitude });
-			}
-			function error() {
-				setError('Debes permitir la geolocalización');
-			}
-			navigator.geolocation.getCurrentPosition(success, error);
-		} else {
-			setError('Navegador no soporta geolocalización');
-		}
-	};
+
 	return (
 		<>
 			<h1>App</h1>
-			<form onSubmit={handleSubmit}>
-				<input
-					type="text"
-					value={value}
-					onChange={(e) => setValue(e.target.value)}
-					placeholder="Ingresa una ciudad"
-				/>
-			</form>
-			<button onClick={handleLocation}>Ubicación</button>
+			<Search setCity={setCity} setCoords={setCoords} setError={setError} />
 			{error && <p className="error">{error}</p>}
-			{weather && (
-				<>
-					<h2>
-						{weather.name},<span>{weather.country}</span>
-					</h2>
-					<h1>{weather.temp}°C</h1>
-					<h3>{weather.description}</h3>
-					<h3>Velocidad de viento: {weather.wind} m/s</h3>
-					<h3>Nubes: {weather.clouds}%</h3>
-					<h3>Presión: {weather.pressure} hPa</h3>
-				</>
-			)}
+			{weather && <Information weather={weather} />}
 		</>
 	);
 }
