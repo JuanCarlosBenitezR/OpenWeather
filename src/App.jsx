@@ -46,6 +46,7 @@ function App() {
 					clouds: res.data.clouds.all,
 					pressure: res.data.main.pressure,
 					temp: Math.ceil(res.data.main.temp),
+					tempFahrenheit: Math.ceil((res.data.main.temp * 9) / 5 + 32),
 					// sunrise: new Date(res.data.sys.sunrise * 1000).toLocaleTimeString(
 					// 	[],
 					// 	timeOptions,
