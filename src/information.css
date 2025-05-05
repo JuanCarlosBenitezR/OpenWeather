@@ -1,0 +1,5 @@
+@media (max-height: 500px) {
+	.card {
+		height: 500px;
+	}
+}

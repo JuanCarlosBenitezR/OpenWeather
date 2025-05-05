@@ -5,17 +5,19 @@
 	line-height: 1.5;
 	font-weight: 400;
 	font-synthesis: none;
-	background-color: #ffffff;
+	background-color: rgb(71, 209, 78);
 	color: #000000;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
 }
 
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
 }
 body {
 	margin: 0;
