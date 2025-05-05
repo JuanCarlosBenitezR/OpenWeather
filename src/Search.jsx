@@ -1,3 +1,4 @@
+import { Locate } from 'lucide-react';
 import React from 'react';
 import { useState } from 'react';
 
@@ -12,8 +13,6 @@ function Search({ setCity, setCoords, setError }) {
 			setValue('');
 		} else {
 			setError('Debes ingresar una ciudad');
-			console.log('no ciudad');
-			console.log(value);
 		}
 	};
 	const handleLocation = () => {
@@ -30,16 +29,20 @@ function Search({ setCity, setCoords, setError }) {
 		}
 	};
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
+		<div className="flex justify-center items-center gap-2 mb-4 sm:text-base md:text-lg lg:text-2xl xl:text-5xl">
+			<form className="pr-5" onSubmit={handleSubmit}>
 				<input
 					type="text"
 					value={value}
 					onChange={(e) => setValue(e.target.value)}
 					placeholder="Ingresa una ciudad"
+					className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
 				/>
 			</form>
-			<button onClick={handleLocation}>Ubicación</button>
+			<Locate
+				onClick={handleLocation}
+				className="bg-indigo-500 hover:bg-red-500 text-white rounded-full p-2 cursor-pointer w-8 h-8 md:w-10 md:h-10 xl:w-15 xl:h-15"
+			/>
 		</div>
 	);
 }

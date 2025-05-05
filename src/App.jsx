@@ -26,7 +26,6 @@ function App() {
 	const getWeatherByCity = async () => {
 		const { lat, lon } = coords;
 		setError(null);
-		console.log(coords);
 		axios
 			.get(
 				`${BASE_URL}${
@@ -67,12 +66,14 @@ function App() {
 	};
 
 	return (
-		<>
-			<h1>App</h1>
+		<div className="size-full flex flex-col  items-center  h-screen">
+			<h1 className=" font-bold pb-10 text-lg md:text-2xl lg:text-3xl  xl:text-6xl">
+				Weather App
+			</h1>
 			<Search setCity={setCity} setCoords={setCoords} setError={setError} />
 			{error && <p className="error">{error}</p>}
 			{weather && <Information weather={weather} />}
-		</>
+		</div>
 	);
 }
 
