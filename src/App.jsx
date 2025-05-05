@@ -3,8 +3,11 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import Search from './Search';
 import Information from './Information';
+import { rain, clear, clouds, mist, snow, thunderstorm } from './assets/images';
+const images = [rain, clear, clouds, mist, snow, thunderstorm];
 
 function App() {
+	const [img, setImg] = useState(images);
 	const [weather, setWeather] = useState();
 	const [city, setCity] = useState('Mexico City');
 	const [coords, setCoords] = useState({
@@ -56,6 +59,35 @@ function App() {
 					// ),
 					description: res.data.weather[0].description,
 				});
+				let weatherType;
+				switch (res.data.weather[0].main.toLowerCase()) {
+					case 'rain':
+						weatherType = images[0];
+						break;
+					case 'clear':
+						weatherType = images[1];
+						break;
+					case 'clouds':
+						weatherType = images[2];
+						break;
+					case 'mist':
+						weatherType = images[3];
+						break;
+					case 'snow':
+						weatherType = images[4];
+						break;
+					case 'thunderstorm':
+						weatherType = images[5];
+						break;
+					default:
+						weatherType = images[1];
+						break;
+				}
+				setImg(weatherType);
+				console.log(img);
+				console.log('res.data.weather[0].main:' + res.data.weather[0].main);
+				console.log(imgURL);
+				console.log(images);
 			})
 			.catch((err) => {
 				if (err.response?.status === 404) {
@@ -64,9 +96,13 @@ function App() {
 				console.error(err.response?.data?.message || err.message);
 			});
 	};
+	const imgURL = `url(${img})`;
 
 	return (
-		<div className="size-full flex flex-col  items-center  h-screen">
+		<div
+			className="size-full flex flex-col  items-center  m-0 h-dvh overflow-auto"
+			style={{ backgroundImage: imgURL }}
+		>
 			<h1 className=" font-bold pb-10 text-lg md:text-2xl lg:text-3xl  xl:text-6xl">
 				Weather App
 			</h1>
