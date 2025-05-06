@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Information.css';
+import './information.css';
 
 function Information({ weather }) {
 	const [unitCelcius, setUnitCelcius] = useState(true);
