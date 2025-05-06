@@ -3,3 +3,13 @@
 		height: 500px;
 	}
 }
+@media (min-height: 501px) {
+	.card {
+		height: fit-content;
+	}
+}
+@media (min-height: 2000px) {
+	.card {
+		height: 100%;
+	}
+}
