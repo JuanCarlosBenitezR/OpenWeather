@@ -36,12 +36,12 @@ function Search({ setCity, setCoords, setError }) {
 					value={value}
 					onChange={(e) => setValue(e.target.value)}
 					placeholder="Ingresa una ciudad"
-					className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+					className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
 				/>
 			</form>
 			<Locate
 				onClick={handleLocation}
-				className="bg-indigo-500 hover:bg-red-500 text-white rounded-full p-2 cursor-pointer w-8 h-8 md:w-10 md:h-10 xl:w-15 xl:h-15"
+				className="bg-green-700 hover:bg-red-500 text-white rounded-full p-2 cursor-pointer w-8 h-8 md:w-10 md:h-10 xl:w-15 xl:h-15"
 			/>
 		</div>
 	);
