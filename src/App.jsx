@@ -100,7 +100,7 @@ function App() {
 
 	return (
 		<div
-			className=" size-full flex flex-col  items-center  m-0 h-full  "
+			className=" w-full flex flex-col  items-center  m-0 h-full  "
 			style={{ backgroundImage: imgURL }}
 		>
 			<h1 className=" font-bold pb-10 text-lg md:text-2xl lg:text-3xl  xl:text-6xl">
