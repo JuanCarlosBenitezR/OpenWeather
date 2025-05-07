@@ -11,7 +11,7 @@ function Search({ setCity, setCoords, setError }) {
 			setCity('');
 			setError('Debes ingresar una ciudad');
 		} else {
-			setCity(value);
+			setCity(value.trim());
 			setValue('');
 			setError('');
 		}

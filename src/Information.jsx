@@ -13,7 +13,7 @@ function Information({ weather }) {
 			</h2>
 			<div className="grid grid-cols-2 gap-5 justify-center items-center">
 				<img
-					src={`http://openweathermap.org/img/wn/${weather.icons}@2x.png`}
+					src={`https://openweathermap.org/img/wn/${weather.icons}@2x.png`}
 					className="center w-15 h-15 md:w-15 md:h-15 lg:w-25 lg:h-25 xl:w-35 xl:h-35 mx-auto"
 				/>
 				{unitCelcius && (
