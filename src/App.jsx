@@ -33,11 +33,6 @@ function App() {
 		const { lat, lon } = coords;
 		setError(null);
 		setloading(true);
-		console.log(city);
-		console.log(error);
-		if (city === '') {
-			setError('Debes ingresar una ciudad');
-		}
 
 		axios
 			.get(
@@ -96,7 +91,11 @@ function App() {
 				if (err.response?.status === 404) {
 					setError('Ciudad no encontrada');
 				} else if (err.response?.status === 400) {
-					setError('Error en la solicitud');
+					if (city === '') {
+						setError('Debes ingresar una ciudad');
+					} else {
+						setError('Error en la solicitud');
+					}
 				} else if (err.response?.status === 401) {
 					setError('Error de autenticación');
 				} else if (err.response?.status === 500) {

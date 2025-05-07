@@ -7,11 +7,12 @@ function Search({ setCity, setCoords, setError }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setCoords({ lat: 0, lon: 0 });
-		if (value.trim()) {
-			setCity(value);
-			setValue('');
-		} else {
+		if (value.trim() === '') {
+			setCity('');
 			setError('Debes ingresar una ciudad');
+		} else {
+			setCity(value);
+			setError('');
 		}
 	};
 	const handleLocation = () => {
@@ -34,8 +35,9 @@ function Search({ setCity, setCoords, setError }) {
 					type="text"
 					value={value}
 					onChange={(e) => setValue(e.target.value)}
+					required
 					placeholder="Ingresa una ciudad"
-					className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 hover:placeholder:text-green-500 transition-all duration-300"
+					className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 hover:placeholder:text-green-500 transition-all duration-300 invalid:placeholder: invalid:border-red-500 invalid:ring-red-500"
 				/>
 			</form>
 			<Locate
