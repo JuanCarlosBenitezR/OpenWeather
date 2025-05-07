@@ -11,16 +11,22 @@ function Information({ weather }) {
 			<h2 className="font-semibold">
 				{weather.name},<span>{weather.country}</span>
 			</h2>
-			{unitCelcius && (
-				<h1 className=" font-bold text-5xl  md:text-7xl lg:text-9xl ">
-					{weather.temp}°C
-				</h1>
-			)}
-			{!unitCelcius && (
-				<h1 className="font-bold text-5xl  md:text-7xl lg:text-9xl ">
-					{weather.tempFahrenheit}°F
-				</h1>
-			)}
+			<div className="grid grid-cols-2 gap-5 justify-center items-center">
+				<img
+					src={`http://openweathermap.org/img/wn/${weather.icons}@2x.png`}
+					className="center w-15 h-15 md:w-15 md:h-15 lg:w-25 lg:h-25 xl:w-35 xl:h-35 mx-auto"
+				/>
+				{unitCelcius && (
+					<h1 className=" font-bold text-5xl  md:text-7xl lg:text-9xl ">
+						{weather.temp}°C
+					</h1>
+				)}
+				{!unitCelcius && (
+					<h1 className="font-bold text-5xl  md:text-7xl lg:text-9xl ">
+						{weather.tempFahrenheit}°F
+					</h1>
+				)}
+			</div>
 			<h3 className="font-bold uppercase">{weather.description}</h3>
 			<h3 className="">
 				Velocidad de viento:{' '}

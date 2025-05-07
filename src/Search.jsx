@@ -8,7 +8,6 @@ function Search({ setCity, setCoords, setError }) {
 		e.preventDefault();
 		setCoords({ lat: 0, lon: 0 });
 		if (value.trim()) {
-			console.log('entraaqui');
 			setCity(value);
 			setValue('');
 		} else {
@@ -36,7 +35,7 @@ function Search({ setCity, setCoords, setError }) {
 					value={value}
 					onChange={(e) => setValue(e.target.value)}
 					placeholder="Ingresa una ciudad"
-					className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+					className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 hover:placeholder:text-green-500 transition-all duration-300"
 				/>
 			</form>
 			<Locate

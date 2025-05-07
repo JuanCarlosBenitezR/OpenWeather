@@ -32,9 +32,13 @@ function App() {
 	const getWeatherByCity = async () => {
 		const { lat, lon } = coords;
 		setError(null);
-
 		setloading(true);
-		console.log(loading);
+		console.log(city);
+		console.log(error);
+		if (city === '') {
+			setError('Debes ingresar una ciudad');
+		}
+
 		axios
 			.get(
 				`${BASE_URL}${
@@ -42,11 +46,6 @@ function App() {
 				}&appid=${apiKey}${options}`,
 			)
 			.then((res) => {
-				// const timeOptions = {
-				// 	hour: '2-digit',
-				// 	minute: '2-digit',
-				// 	hour12: true,
-				// };
 				setWeather({
 					name: res.data.name,
 					country: res.data.sys.country,
@@ -64,6 +63,7 @@ function App() {
 					// 	timeOptions,
 					// ),
 					description: res.data.weather[0].description,
+					icons: res.data.weather[0].icon,
 				});
 				let weatherType;
 				switch (res.data.weather[0].main.toLowerCase()) {
@@ -90,12 +90,7 @@ function App() {
 						break;
 				}
 				setImg(weatherType);
-				console.log(img);
-				console.log('res.data.weather[0].main:' + res.data.weather[0].main);
-				console.log(imgURL);
-				console.log(images);
 				setloading(false);
-				console.log(loading);
 			})
 			.catch((err) => {
 				if (err.response?.status === 404) {
