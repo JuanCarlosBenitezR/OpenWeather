@@ -7,7 +7,7 @@ function Information({ weather }) {
 		setUnitCelcius(!unitCelcius);
 	};
 	return (
-		<div className=" card text-base sm:text-base md:text-lg lg:text-2xl xl:text-5xl   shadow-md flex flex-col items-center justify-center gap-10 w-5/6  h-dvh  py-10  backdrop-blur-md bg-white/10 rounded-xl ">
+		<div className=" card text-base sm:text-base md:text-lg lg:text-2xl xl:text-5xl   shadow-md flex flex-col items-center justify-center gap-10 w-fit  h-dvh  py-10 px-5 backdrop-blur-md bg-white/10 rounded-xl ">
 			<h2 className="font-semibold">
 				{weather.name},<span>{weather.country}</span>
 			</h2>

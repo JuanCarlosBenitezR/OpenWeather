@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import Search from './Search';
 import Information from './Information';
 import { rain, clear, clouds, mist, snow, thunderstorm } from './assets/images';
+import Loadings from './assets/components/Loadings';
+import Error from './assets/components/Error';
 const images = [rain, clear, clouds, mist, snow, thunderstorm];
 
 function App() {
-	const [img, setImg] = useState(images);
+	const [img, setImg] = useState(images[1]);
 	const [weather, setWeather] = useState();
 	const [city, setCity] = useState('Mexico City');
 	const [coords, setCoords] = useState({
@@ -25,10 +27,14 @@ function App() {
 	const query = 'q={city name}';
 	const cordsx = 'lat={lat}&lon={lon}';
 	const options = '&units=metric&lang=es';
+	const [loading, setloading] = useState(false);
 
 	const getWeatherByCity = async () => {
 		const { lat, lon } = coords;
 		setError(null);
+
+		setloading(true);
+		console.log(loading);
 		axios
 			.get(
 				`${BASE_URL}${
@@ -88,11 +94,24 @@ function App() {
 				console.log('res.data.weather[0].main:' + res.data.weather[0].main);
 				console.log(imgURL);
 				console.log(images);
+				setloading(false);
+				console.log(loading);
 			})
 			.catch((err) => {
 				if (err.response?.status === 404) {
 					setError('Ciudad no encontrada');
+				} else if (err.response?.status === 400) {
+					setError('Error en la solicitud');
+				} else if (err.response?.status === 401) {
+					setError('Error de autenticación');
+				} else if (err.response?.status === 500) {
+					setError('Error interno del servidor');
+				} else if (err.response?.status === 429) {
+					setError('Demasiadas solicitudes, reintente más tarde');
+				} else {
+					setError('Error desconocido');
 				}
+				setloading(false);
 				console.error(err.response?.data?.message || err.message);
 			});
 	};
@@ -107,8 +126,10 @@ function App() {
 				Weather App
 			</h1>
 			<Search setCity={setCity} setCoords={setCoords} setError={setError} />
-			{error && <p className="error">{error}</p>}
-			{weather && <Information weather={weather} />}
+
+			{loading && <Loadings></Loadings>}
+			{error && <Error error={error} />}
+			{weather && !loading && !error && <Information weather={weather} />}
 		</div>
 	);
 }
